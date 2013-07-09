@@ -1,0 +1,3 @@
+@interface ZBDetailViewController : UIViewController
+
+@end
