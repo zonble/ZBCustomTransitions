@@ -28,7 +28,9 @@ static NSInteger const column = 5;
 	for (NSInteger i = 0; i < row; i++) {
 		for (NSInteger j = 0; j < column; j++) {
 			CGRect aRect = CGRectMake(j * width, i * height, width, height);
-			UIView *aView = [fromVC.view resizableSnapshotViewFromRect:aRect withCapInsets:UIEdgeInsetsZero];
+            UIView *aView = [fromVC.view resizableSnapshotViewFromRect:aRect
+                                                    afterScreenUpdates:NO
+                                                         withCapInsets:UIEdgeInsetsZero];
 			aView.frame = aRect;
 			CGFloat angle = ((j + i) % 2 ? 1 : -1) * (rand() % 5 / 10.0);
 			aView.transform = CGAffineTransformMakeRotation(angle);
@@ -44,7 +46,6 @@ static NSInteger const column = 5;
 	UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:toVC.view];
 	UIDynamicBehavior *behaviour = [[UIDynamicBehavior alloc] init];
 	UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:views];
-	[gravityBehaviour setYComponent:1.0];
 	UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:views];
 	collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
 	collisionBehavior.collisionMode = UICollisionBehaviorModeBoundaries;
